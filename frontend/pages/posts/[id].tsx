@@ -20,7 +20,7 @@ export default function PostData({ post }: Props): JSX.Element {
     <div className="">
       <div className="">
         <h1 className="">{post.title}</h1>
-        <p className="">{post.created_at} {post.updated_at}</p>
+        <p className="date">created_at:{post.created_at}&nbsp;&nbsp;&nbsp;updated_at:{post.updated_at}</p>
         <div className="post-detail">
 			<Image alt="post" priority={true} className="" src={post.image} width={223} height={154} style={{ width: '100%', height: 'auto' }} />
 		</div>
