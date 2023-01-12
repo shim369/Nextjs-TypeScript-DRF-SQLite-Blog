@@ -1,14 +1,26 @@
-// import Head from 'next/head'
-// import Image from 'next/image'
-// import { Inter } from '@next/font/google'
+import type { InferGetStaticPropsType } from "next";
 import Layout from '../layouts/layout'
+import Post from "../components/post/post";
+import { getAllPostsData } from "../lib/posts";
 
-// const inter = Inter({ subsets: ['latin'] })
+type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
-export default function Home() {
+export async function getStaticProps() {
+	const posts = await getAllPostsData();
+  
+	return {
+	  props: { posts },
+	  revalidate: 3,
+	};
+}
+
+export default function Home({ posts }: Props) {
 	return (
 		<Layout title="" description="" >
-			<p>top page</p>
+			<div className="post">
+				{posts && posts.map((post: any) => <Post key={post.id} post={post} />)}
+			</div>
 		</Layout>
 	)
 }
+
